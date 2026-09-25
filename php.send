@@ -1,1 +1,126 @@
+```php
+<?php
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+// Load PHPMailer
+require 'vendor/autoload.php';
+
+$mail = new PHPMailer(true);
+
+try {
+
+    // =========================
+    // SMTP CONFIGURATION
+    // =========================
+
+    $mail->isSMTP();
+    $mail->Host       = 'smtp.gmail.com';
+    $mail->SMTPAuth   = true;
+
+    // Your Gmail address
+    $mail->Username   = 'Google.com';
+
+    // Your Gmail App Password
+    $mail->Password   = 'berd-sksi-ztsx-qtno';
+
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+    $mail->Port       = 587;
+
+
+    // =========================
+    // SENDER
+    // =========================
+
+    $mail->setFrom(
+        'Google.com',
+        'My Website'
+    );
+
+
+    // =========================
+    // RECIPIENT
+    // =========================
+
+    $mail->addAddress(
+        'cp50655@icloud.com'
+    );
+
+
+    // =========================
+    // EMAIL CONTENT
+    // =========================
+
+    $mail->isHTML(true);
+
+    $mail->Subject = 'Important Message';
+
+
+    // The actual URL is hidden behind "Click here"
+    $mail->Body = '
+        <html>
+        <body>
+
+            <h2>Hello!</h2>
+
+            <p>
+                Thank you for your interest.
+            </p>
+
+            <p>
+                Please click the button below:
+            </p>
+
+            <p>
+                <a href="https://Google.com"
+                   style="
+                       display:inline-block;
+                       padding:12px 24px;
+                       background-color:#007bff;
+                       color:#ffffff;
+                       text-decoration:none;
+                       border-radius:6px;
+                       font-family:Arial,sans-serif;
+                   ">
+                   Click here
+                </a>
+            </p>
+
+            <p>
+                Thank you.
+            </p>
+
+        </body>
+        </html>
+    ';
+
+
+    // =========================
+    // PLAIN-TEXT VERSION
+    // =========================
+
+    $mail->AltBody =
+        "Hello!\n\n" .
+        "Thank you for your interest.\n\n" .
+        "Visit: https://example.com";
+
+
+    // =========================
+    // SEND EMAIL
+    // =========================
+
+    $mail->send();
+
+    echo "Email sent successfully!";
+
+} catch (Exception $e) {
+
+    echo "Email could not be sent.";
+    echo "<br>";
+    echo "Error: " . $mail->ErrorInfo;
+
+}
+?>
+```
 
